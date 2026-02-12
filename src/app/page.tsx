@@ -7,10 +7,12 @@ export default function Home() {
       <nav className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <h1 className="text-xl font-bold text-teal-600">쉬고 싶지 않아</h1>
-          <div className="space-x-6 text-sm font-medium text-gray-600">
+          <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
             <Link href="/community" className="hover:text-teal-600 transition">커뮤니티</Link>
-            <Link href="/jobs" className="hover:text-teal-600 transition">알바/구인</Link>
+            <Link href="/jobs?type=alba" className="hover:text-teal-600 transition">부담없는 알바</Link>
+            <Link href="/jobs?type=career" className="hover:text-teal-600 transition">커리어 도약</Link>
             <Link href="/edu" className="hover:text-teal-600 transition">국비지원</Link>
+            <Link href="/projects" className="hover:text-teal-600 transition">팀프로젝트</Link>
           </div>
         </div>
       </nav>
@@ -40,31 +42,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Grid Sections */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-6 text-2xl">🤝</div>
-              <h3 className="text-xl font-bold mb-3">익명 커뮤니티</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                거창한 스펙 이야기 대신, 오늘 하루 어떻게 보냈는지 편하게 이야기 나눠요.
-              </p>
+      {/* Roadmap Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-12 text-gray-800">다시 사회와 연결되는 3단계 로드맵</h2>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+            {/* Step 1 */}
+            <div className="flex-1 bg-white p-8 rounded-2xl border-2 border-teal-100 relative z-10">
+              <div className="text-teal-600 font-bold mb-2">STEP 01. 마음 열기</div>
+              <h4 className="text-xl font-bold mb-4">정서적 공감 & 커뮤니티</h4>
+              <p className="text-gray-600 text-sm">익명으로 '오늘의 생존 신고'를 남기고 다른 청년들과 소통하며 혼자가 아님을 확인하세요.</p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-2xl">🌱</div>
-              <h3 className="text-xl font-bold mb-3">소프트 랜딩 일자리</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                재택근무, 단기 업무 등 심리적 부담이 적은 공고부터 차근차근 시작해 보세요.
-              </p>
+            {/* Arrow */}
+            <div className="hidden md:block text-teal-200 text-3xl">→</div>
+            {/* Step 2 */}
+            <div className="flex-1 bg-white p-8 rounded-2xl border-2 border-blue-100 relative z-10">
+              <div className="text-blue-600 font-bold mb-2">STEP 02. 감 잡기</div>
+              <h4 className="text-xl font-bold mb-4">단기 알바 & 국비 교육</h4>
+              <p className="text-gray-600 text-sm">부담 없는 재택 알바나 맞춤형 국비 교육으로 실무 감각을 서서히 되찾아보세요.</p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-6 text-2xl">📚</div>
-              <h3 className="text-xl font-bold mb-3">맞춤형 국비지원</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                복잡한 정책 공고는 이제 그만. 나에게 꼭 필요한 교육 정보만 쏙쏙 골라드려요.
-              </p>
+            {/* Arrow */}
+            <div className="hidden md:block text-blue-200 text-3xl">→</div>
+            {/* Step 3 */}
+            <div className="flex-1 bg-white p-8 rounded-2xl border-2 border-purple-100 relative z-10">
+              <div className="text-purple-600 font-bold mb-2">STEP 03. 도약하기</div>
+              <h4 className="text-xl font-bold mb-4">팀 프로젝트 & 취창업</h4>
+              <p className="text-gray-600 text-sm">직무 전환 프로젝트나 창업 멘토링을 통해 나만의 커리어를 다시 시작하세요.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Career & Startup Support */}
+      <section className="py-16 bg-white border-t border-gray-50">
+        <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+          <div className="p-10 bg-gradient-to-br from-purple-50 to-white rounded-3xl border border-purple-100">
+            <h3 className="text-2xl font-bold mb-4 text-purple-900">직무 전환 팀 프로젝트</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">현직자 멘토와 함께 실제 프로젝트를 수행하며 이력서의 공백을 실무 경험으로 채웁니다.</p>
+            <button className="text-purple-600 font-bold hover:underline">현재 모집 중인 프로젝트 보기 →</button>
+          </div>
+          <div className="p-10 bg-gradient-to-br from-orange-50 to-white rounded-3xl border border-orange-100">
+            <h3 className="text-2xl font-bold mb-4 text-orange-900">1인 창업 및 부업 준비</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">거창한 창업이 아닌, 나만의 작은 비즈니스를 시작할 수 있도록 실질적인 도구와 교육을 지원합니다.</p>
+            <button className="text-orange-600 font-bold hover:underline">창업 가이드라인 읽어보기 →</button>
           </div>
         </div>
       </section>

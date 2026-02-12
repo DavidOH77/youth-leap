@@ -14,6 +14,28 @@ interface Job {
   scraped_at: string;
 }
 
+// 초기 데이터 수집 전 사용자에게 보여줄 백업 데이터
+const fallbackJobs: Job[] = [
+  {
+    id: 'seed-1',
+    title: '[재택] 간단한 도서 리뷰 타이핑 알바',
+    company: '(주)북로그',
+    pay_info: '시급 12,000원',
+    tags: ['재택', '초보가능', '단기'],
+    link_url: 'https://www.albamon.com',
+    scraped_at: new Date().toISOString()
+  },
+  {
+    id: 'seed-2',
+    title: '오전 4시간 카페 기물 정리 (청년 우대)',
+    company: '몽글카페',
+    pay_info: '시급 10,500원',
+    tags: ['단기', '오전', '부담없음'],
+    link_url: 'https://www.alba.co.kr',
+    scraped_at: new Date().toISOString()
+  }
+];
+
 export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +48,12 @@ export default function JobsPage() {
         .eq('is_active', true)
         .order('scraped_at', { ascending: false });
       
-      if (data) setJobs(data);
+      // DB가 비어있으면 백업 데이터를 보여줌
+      if (data && data.length > 0) {
+        setJobs(data);
+      } else {
+        setJobs(fallbackJobs);
+      }
       setLoading(false);
     }
     fetchJobs();
