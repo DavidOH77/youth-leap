@@ -37,12 +37,15 @@ async function runEngine() {
   const dcPosts = await scrapeDCInside('jungsogallery'); // 중소기업 갤러리
   if (dcPosts.length > 0) {
     const communityPosts = dcPosts.map(p => ({
-      title: `[외부정보] ${p.title}`,
-      content: `출처: 디시인사이드 ${p.gallery}\n바로가기: ${p.link}`,
-      author_name: '정보봇',
-      views: Math.floor(Math.random() * 100)
+      title: `[꿀팁] ${p.title}`,
+      content: `이 정보는 디시인사이드에서 발췌되었습니다.\n관련된 상세 내용은 원문을 참고해 주세요.\n\n출처: ${p.gallery}\n링크: ${p.link}`,
+      author_name: 'Youth-Leap 큐레이터',
+      category: 'INFO',
+      views: 0
     }));
-    await supabase.from('posts').insert(communityPosts);
+
+    // 중복 방지를 위해 제목이 같은 글은 무시하거나 덮어쓰는 로직 (upsert 활용 권장)
+    const { error } = await supabase.from('posts').upsert(communityPosts, { onConflict: 'title' });
     console.log('디시인사이드 정보글 업데이트 완료.');
   }
 }

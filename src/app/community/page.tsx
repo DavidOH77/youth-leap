@@ -78,10 +78,13 @@ export default function CommunityPage() {
         ) : (
           <div className="space-y-4">
             {posts.length > 0 ? posts.map((post) => (
-              <div key={post.id} className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-teal-100 hover:bg-teal-50/10 transition-all group">
+              <div key={post.id} className={`bg-white p-6 rounded-2xl border transition-all group ${post.author_name === 'Youth-Leap 큐레이터' ? 'border-blue-100 bg-blue-50/10' : 'border-gray-100 hover:border-teal-100'}`}>
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors">{post.title}</h3>
-                  <span className="text-xs bg-gray-50 text-gray-400 px-2 py-1 rounded">익명</span>
+                  <div className="flex items-center gap-2">
+                    {post.author_name === 'Youth-Leap 큐레이터' && <span className="px-2 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded">큐레이션</span>}
+                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors">{post.title}</h3>
+                  </div>
+                  <span className="text-xs bg-gray-50 text-gray-400 px-2 py-1 rounded">{post.author_name}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-sm text-gray-400 space-x-4">
