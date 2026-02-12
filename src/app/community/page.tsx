@@ -16,26 +16,76 @@ interface Post {
 export default function CommunityPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+  const [newPost, setNewPost] = useState({ title: '', content: '' });
+
+  async function fetchPosts() {
+    setLoading(true);
+    const { data } = await supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (data) setPosts(data);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function fetchPosts() {
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (data) setPosts(data);
-      setLoading(false);
-    }
     fetchPosts();
   }, []);
 
+  const handleWriteSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPost.title || !newPost.content) return;
+
+    const { error } = await supabase.from('posts').insert([
+      { title: newPost.title, content: newPost.content, author_name: '익명청년' }
+    ]);
+
+    if (!error) {
+      setIsWriteModalOpen(false);
+      setNewPost({ title: '', content: '' });
+      fetchPosts(); // 목록 새로고침
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 relative">
+      {/* Write Modal */}
+      {isWriteModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl w-full max-w-lg p-8 shadow-2xl">
+            <h3 className="text-2xl font-bold mb-6">글쓰기</h3>
+            <form onSubmit={handleWriteSubmit}>
+              <input 
+                className="w-full p-4 bg-gray-50 border-none rounded-2xl mb-4 focus:ring-2 focus:ring-teal-500 outline-none"
+                placeholder="제목을 입력하세요"
+                value={newPost.title}
+                onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+              />
+              <textarea 
+                className="w-full p-4 bg-gray-50 border-none rounded-2xl mb-6 h-40 focus:ring-2 focus:ring-teal-500 outline-none resize-none"
+                placeholder="오늘 하루는 어땠나요?"
+                value={newPost.content}
+                onChange={(e) => setNewPost({...newPost, content: e.target.value})}
+              />
+              <div className="flex gap-4">
+                <button type="button" onClick={() => setIsWriteModalOpen(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-bold">취소</button>
+                <button type="submit" className="flex-1 py-4 bg-teal-600 text-white rounded-2xl font-bold shadow-lg shadow-teal-100">등록하기</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <nav className="border-b bg-white p-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-teal-600">Youth-Leap</Link>
-          <button className="bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-bold">글쓰기</button>
+          <button 
+            onClick={() => setIsWriteModalOpen(true)}
+            className="bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm"
+          >
+            글쓰기
+          </button>
         </div>
       </nav>
 
@@ -45,7 +95,10 @@ export default function CommunityPage() {
             <h2 className="text-3xl font-extrabold text-gray-900 mb-2">커뮤니티</h2>
             <p className="text-gray-500">혼자가 아니에요. 오늘 하루도 함께 살아내 봐요.</p>
           </div>
-          <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl text-md font-bold shadow-lg shadow-teal-100 transition-all flex items-center gap-2">
+          <button 
+            onClick={() => setIsWriteModalOpen(true)}
+            className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl text-md font-bold shadow-lg shadow-teal-100 transition-all flex items-center gap-2"
+          >
             <span>✏️</span> 오늘의 생존 신고하기
           </button>
         </div>
@@ -53,12 +106,16 @@ export default function CommunityPage() {
         {/* Retention Widget: Daily Rituals */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {[
-            { emoji: '☀️', label: '햇볕 쬐기', count: 124 },
-            { emoji: '🚶', label: '30분 걷기', count: 89 },
-            { emoji: '📚', label: '독서하기', count: 42 },
-            { emoji: '💧', label: '물 마시기', count: 256 },
+            { id: 'sun', emoji: '☀️', label: '햇볕 쬐기', count: 124 },
+            { id: 'walk', emoji: '🚶', label: '30분 걷기', count: 89 },
+            { id: 'read', emoji: '📚', label: '독서하기', count: 42 },
+            { id: 'water', emoji: '💧', label: '물 마시기', count: 256 },
           ].map((item) => (
-            <div key={item.label} className="bg-white p-4 rounded-2xl border border-gray-100 flex flex-col items-center shadow-sm hover:border-teal-200 cursor-pointer transition">
+            <div 
+              key={item.id} 
+              onClick={() => alert(`${item.label} 성공! 오늘도 한 걸음 도약하셨네요.`)}
+              className="bg-white p-4 rounded-2xl border border-gray-100 flex flex-col items-center shadow-sm hover:border-teal-200 cursor-pointer active:scale-95 transition-all"
+            >
               <span className="text-2xl mb-2">{item.emoji}</span>
               <span className="text-sm font-bold text-gray-800">{item.label}</span>
               <span className="text-xs text-teal-600 mt-1">{item.count}명 참여중</span>
