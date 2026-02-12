@@ -84,7 +84,7 @@ export default function Home() {
           <div className="p-10 bg-gradient-to-br from-orange-50 to-white rounded-3xl border border-orange-100">
             <h3 className="text-2xl font-bold mb-4 text-orange-900">1인 창업 및 부업 준비</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">거창한 창업이 아닌, 나만의 작은 비즈니스를 시작할 수 있도록 실질적인 도구와 교육을 지원합니다.</p>
-            <button className="text-orange-600 font-bold hover:underline">창업 가이드라인 읽어보기 →</button>
+            <Link href="/startup" className="text-orange-600 font-bold hover:underline">창업 가이드라인 읽어보기 →</Link>
           </div>
         </div>
       </section>
