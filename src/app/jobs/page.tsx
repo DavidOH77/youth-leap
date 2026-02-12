@@ -77,20 +77,20 @@ export default function JobsPage() {
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
             {jobs.length > 0 ? jobs.map((job) => (
-              <a href={job.link_url} key={job.id} target="_blank" rel="noopener noreferrer" 
-                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+              <Link href={`/jobs/${job.id}`} key={job.id}
+                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition group">
                 <div className="flex justify-between items-start mb-4">
                   <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded">모집중</span>
                   <span className="text-sm font-semibold text-gray-900">{job.pay_info}</span>
                 </div>
-                <h3 className="text-lg font-bold mb-1">{job.title}</h3>
+                <h3 className="text-lg font-bold mb-1 group-hover:text-teal-600 transition-colors">{job.title}</h3>
                 <p className="text-sm text-gray-500 mb-4">{job.company}</p>
                 <div className="flex flex-wrap gap-2">
                   {job.tags?.map(tag => (
                     <span key={tag} className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">#{tag}</span>
                   ))}
                 </div>
-              </a>
+              </Link>
             )) : (
               <div className="col-span-2 py-20 text-center text-gray-400">
                 현재 등록된 공고가 없습니다. 곧 업데이트될 예정입니다.
