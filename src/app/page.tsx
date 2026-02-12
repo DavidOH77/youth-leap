@@ -6,7 +6,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-teal-600">쉬고 싶지 않아</h1>
+          <h1 className="text-xl font-bold text-teal-600">Youth-Leap</h1>
           <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
             <Link href="/community" className="hover:text-teal-600 transition">커뮤니티</Link>
             <Link href="/jobs?type=alba" className="hover:text-teal-600 transition">부담없는 알바</Link>
@@ -24,12 +24,12 @@ export default function Home() {
             유스리프(Youth Leap) 프로젝트
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
-            조금 쉬었을 뿐,<br />
-            <span className="text-teal-600">멈추고 싶은 건 아니니까.</span>
+            내일을 위한 준비,<br />
+            <span className="text-teal-600">Youth-Leap과 함께 도약하세요.</span>
           </h2>
           <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-            '쉬고 싶지 않아'는 쉬었음 청년들이 다시 사회와 연결되고,<br />
-            자신만의 속도로 일상을 되찾을 수 있도록 돕는 커뮤니티 플랫폼입니다.
+            Youth-Leap은 청년들이 다시 사회와 건강하게 연결되고,<br />
+            자신만의 커리어를 설계할 수 있도록 돕는 플랫폼입니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="px-8 py-4 bg-teal-600 text-white rounded-xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">

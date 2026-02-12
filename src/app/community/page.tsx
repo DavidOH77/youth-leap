@@ -34,7 +34,7 @@ export default function CommunityPage() {
     <main className="min-h-screen bg-gray-50">
       <nav className="border-b bg-white p-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-teal-600">쉬고 싶지 않아</Link>
+          <Link href="/" className="text-xl font-bold text-teal-600">Youth-Leap</Link>
           <button className="bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-bold">글쓰기</button>
         </div>
       </nav>

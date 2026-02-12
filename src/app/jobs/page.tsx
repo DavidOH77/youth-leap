@@ -63,7 +63,7 @@ export default function JobsPage() {
     <main className="min-h-screen bg-gray-50">
       <nav className="border-b bg-white p-4">
         <div className="max-w-5xl mx-auto">
-          <Link href="/" className="text-xl font-bold text-teal-600">쉬고 싶지 않아</Link>
+          <Link href="/" className="text-xl font-bold text-teal-600">Youth-Leap</Link>
         </div>
       </nav>
 
