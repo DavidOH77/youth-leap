@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import StatsDashboard from '@/components/StatsDashboard';
 
 interface Job {
   id: string;
@@ -43,11 +44,13 @@ export default function JobsPage() {
         </div>
       </nav>
 
-      <div className="max-w-[1200px] mx-auto py-8 px-4 grid grid-cols-12 gap-6">
-        <div className="col-span-12 md:col-span-9 bg-white border border-gray-300 rounded shadow-sm overflow-hidden">
-          <div className="p-4 border-b bg-[#f8f9fa] flex justify-between items-center">
-            <h2 className="text-base font-black text-gray-800 tracking-tight">부담 없는 일자리 목록</h2>
-          </div>
+      <div className="max-w-[1200px] mx-auto py-8 px-4">
+        <StatsDashboard />
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 md:col-span-9 bg-white border border-gray-300 rounded shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-[#f8f9fa] flex justify-between items-center">
+              <h2 className="text-base font-black text-gray-800 tracking-tight">부담 없는 일자리 목록</h2>
+            </div>
 
           <div className="hidden md:flex items-center px-4 py-2 bg-[#f1f5f9] border-b text-[11px] font-bold text-gray-500 uppercase tracking-tighter">
             <div className="flex-1">공고제목 / 기업명</div>
